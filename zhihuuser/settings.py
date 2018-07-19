@@ -90,4 +90,4 @@ ITEM_PIPELINES = {
 
 REDIS_URL = 'redis://101.132.68.100:6379'
 SCHEDULER = 'scrapy_redis.scheduler.Scheduler'
-DUPEFILTER_CLASS = 'scrapy_reids.dupefilter.RFPDupeFilter'
+DUPEFILTER_CLASS = 'scrapy_redis.dupefilter.RFPDupeFilter'
