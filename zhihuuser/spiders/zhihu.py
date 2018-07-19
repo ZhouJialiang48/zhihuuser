@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 import json
 import scrapy
+from scrapy_redis.spiders import RedisSpider
 from zhihuuser.items import UserItem
 
 
-class ZhihuSpider(scrapy.Spider):
+class ZhihuSpider(RedisSpider):
     name = 'zhihu'
     allowed_domains = ['zhihu.com']
     BASE_URL = 'https://www.zhihu.com/api/v4/members/excited-vczh/followees?include=data%5B*%5D.answer_count%2Carticles_count%2Cgender%2Cfollower_count%2Cis_followed%2Cis_following%2Cbadge%5B%3F(type%3Dbest_answerer)%5D.topics&offset={offset}&limit={limit}'
     LIMIT = 20
     offset = 0
-    start_urls = [BASE_URL.format(limit=LIMIT, offset=offset)]
+    # start_urls = [BASE_URL.format(limit=LIMIT, offset=offset)]
 
     def parse(self, response):
         items = json.loads(response.body, encoding='utf8')['data']
